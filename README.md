@@ -95,4 +95,12 @@ python -m clocked.cli --reg AB12CDE
 
 ## Data source and licence
 
-MOT history data is provided by the Driver and Vehicle Standards Agency under the Open Government Licence v3.0. Clocked reports what the public record contains and does not assert that any vehicle has been fraudulently altered.
+MOT history data is provided by the Driver and Vehicle Standards Agency under the Open Government Licence v3.0.
+
+Clocked is released under the MIT Licence. See `LICENSE`.
+
+## Disclaimer
+
+Clocked reports what the public MOT record shows. A finding is evidence worth investigating further, not proof of fraud, and a clear result does not mean a vehicle is untampered — only that the recorded history is internally consistent.
+
+Mileage altered between MOT tests, on vehicles under three years old, or before import will not appear in this data at all. Treat the output as one input to a decision, not the decision itself.

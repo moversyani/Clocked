@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Clocked{% endblock %}</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1115'/%3E%3Ccircle cx='16' cy='17' r='9.5' fill='none' stroke='%234f8cff' stroke-width='2.4'/%3E%3Cpath d='M16 17 L20.5 11.5' stroke='%234f8cff' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='17' r='1.8' fill='%234f8cff'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1115'/%3E%3Ccircle cx='16' cy='16.6' r='9' fill='none' stroke='%234f8cff' stroke-width='3' stroke-linecap='round' stroke-dasharray='46.34 10.21' transform='rotate(-12 16 16.6)'/%3E%3Ccircle cx='16' cy='16.6' r='1.6' fill='%234f8cff'/%3E%3Cline x1='16' y1='16.6' x2='21.23' y2='11.37' stroke='%234f8cff' stroke-width='2.2' stroke-linecap='round'/%3E%3Ccircle cx='21.23' cy='11.37' r='1.1' fill='%23e0554f'/%3E%3C/svg%3E">
 
 <style>
   :root {
@@ -28,10 +28,24 @@
     line-height: 1.5;
   }
   .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
-  header.site { display: flex; align-items: baseline; gap: 10px; margin-bottom: 40px; }
+  header.site { display: flex; align-items: center; gap: 10px; margin-bottom: 40px; }
   header.site h1 { font-size: 22px; margin: 0; letter-spacing: -0.02em; }
-  header.site h1 a { text-decoration: none; transition: color .15s ease; }
-  header.site h1 a:hover { color: #7aa8ff; }
+  header.site h1 a.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: color .15s ease;
+  }
+  header.site h1 a.brand:hover { color: #7aa8ff; }
+  .brand-mark { flex-shrink: 0; overflow: visible; }
+  .brand-mark .needle-grp {
+    transform-box: view-box;
+    transform-origin: 50px 52px;
+    transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
+  }
+  a.brand:hover .brand-mark .needle-grp { transform: rotate(18deg); }
+  a.brand:hover .brand-mark .ring { filter: drop-shadow(0 0 4px rgba(79, 140, 255, 0.55)); }
   header.site span { color: var(--muted); font-size: 14px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
@@ -85,7 +99,20 @@
 <body>
 <div class="wrap">
   <header class="site">
-    <h1><a href="{% url 'index' %}">Clocked</a></h1>
+    <h1>
+      <a href="{% url 'index' %}" class="brand">
+        <svg class="brand-mark" width="26" height="27" viewBox="0 0 100 104" aria-hidden="true">
+          <circle class="ring" cx="50" cy="52" r="34" fill="none" stroke="#4f8cff" stroke-width="9"
+                  stroke-linecap="round" stroke-dasharray="175.06 38.57" transform="rotate(-12 50 52)"/>
+          <g class="needle-grp">
+            <line x1="50" y1="52" x2="69.8" y2="32.2" stroke="#4f8cff" stroke-width="6" stroke-linecap="round"/>
+            <circle cx="50" cy="52" r="5" fill="#4f8cff"/>
+            <circle cx="69.8" cy="32.2" r="3" fill="#e0554f"/>
+          </g>
+        </svg>
+        Clocked
+      </a>
+    </h1>
     <span>UK vehicle mileage integrity checker</span>
   </header>
   {% block content %}{% endblock %}

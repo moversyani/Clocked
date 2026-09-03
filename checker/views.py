@@ -16,6 +16,8 @@ from clocked.detect import analyse
 from clocked.mot_client import MotApiError, MotClient, VehicleNotFound
 from clocked.normalise import normalise
 
+from .charting import build_timeline_chart
+
 
 def index(request):
     return render(request, "checker/index.html")
@@ -70,5 +72,6 @@ def results(request):
             "report": report,
             "verdict_label": report.verdict.value.replace("_", " ").upper(),
             "timeline": timeline,
+            "chart": build_timeline_chart(report.readings, flagged_dates),
         },
     )

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{% block title %}Clocked{% endblock %}</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230f1115'/%3E%3Ccircle cx='16' cy='17' r='9.5' fill='none' stroke='%234f8cff' stroke-width='2.4'/%3E%3Cpath d='M16 17 L20.5 11.5' stroke='%234f8cff' stroke-width='2.4' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='17' r='1.8' fill='%234f8cff'/%3E%3C/svg%3E">
+
 <style>
   :root {
     --bg: #0f1115;
@@ -28,6 +30,8 @@
   .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
   header.site { display: flex; align-items: baseline; gap: 10px; margin-bottom: 40px; }
   header.site h1 { font-size: 22px; margin: 0; letter-spacing: -0.02em; }
+  header.site h1 a { text-decoration: none; transition: color .15s ease; }
+  header.site h1 a:hover { color: #7aa8ff; }
   header.site span { color: var(--muted); font-size: 14px; }
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
@@ -36,6 +40,7 @@
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 28px;
+    box-shadow: 0 20px 40px -28px rgba(0, 0, 0, 0.6);
   }
   .error {
     background: rgba(224, 85, 79, 0.12);
@@ -57,8 +62,10 @@
     font-size: 16px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    transition: border-color .15s ease;
   }
   form.lookup input[type=text]::placeholder { color: var(--muted); text-transform: none; letter-spacing: normal; }
+  form.lookup input[type=text]:focus { outline: none; border-color: var(--accent); }
   form.lookup button {
     background: var(--accent);
     color: #fff;
@@ -68,8 +75,10 @@
     font-size: 15px;
     font-weight: 600;
     cursor: pointer;
+    transition: filter .15s ease, transform .1s ease;
   }
   form.lookup button:hover { filter: brightness(1.08); }
+  form.lookup button:active { transform: translateY(1px); }
   .hint { color: var(--muted); font-size: 13px; margin-top: 12px; }
 </style>
 </head>

@@ -25,16 +25,27 @@
   section.block { margin-top: 34px; }
   section.block h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 16px; }
 
-  .timeline { position: relative; padding-left: 26px; }
-  .timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: var(--border); }
-  .timeline-item { position: relative; padding-bottom: 20px; }
-  .timeline-item:last-child { padding-bottom: 0; }
-  .timeline-dot { position: absolute; left: -26px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 2px solid var(--panel); }
-  .timeline-item.flag-critical .timeline-dot { background: var(--critical); }
-  .timeline-item.flag-warning .timeline-dot { background: var(--warning); }
-  .timeline-date { font-size: 12px; color: var(--muted); }
-  .timeline-miles { font-size: 16px; font-weight: 600; }
-  .timeline-note { font-size: 12px; color: var(--muted); margin-left: 6px; }
+  .chart-wrap { width: 100%; }
+  .chart-wrap svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .chart-grid line { stroke: var(--border); stroke-width: 1; }
+  .chart-ytick { font-size: 10px; fill: var(--muted); }
+  .chart-xtick { font-size: 10px; fill: var(--muted); }
+  .chart-area { fill: url(#chartFade); }
+  .chart-line { fill: none; stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .chart-point { fill: var(--panel); stroke: var(--accent); stroke-width: 2; }
+  .chart-point.flag-critical { fill: var(--critical); stroke: var(--critical); }
+  .chart-point.flag-warning { fill: var(--warning); stroke: var(--warning); }
+  .chart-point title { pointer-events: none; }
+
+  .reading-list { margin-top: 22px; border-top: 1px solid var(--border); }
+  .reading-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 9px 4px; margin: 0 -4px; border-bottom: 1px solid var(--border); border-radius: 5px; font-size: 13px; transition: background .12s ease; }
+  .reading-row:hover { background: rgba(255, 255, 255, 0.02); }
+  .reading-row .flag-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 8px; background: var(--border); flex-shrink: 0; }
+  .reading-row.flag-critical .flag-dot { background: var(--critical); }
+  .reading-row.flag-warning .flag-dot { background: var(--warning); }
+  .reading-row .date { color: var(--muted); display: flex; align-items: baseline; }
+  .reading-row .miles { font-weight: 600; text-align: right; }
+  .reading-row .note { color: var(--muted); font-weight: 400; font-size: 12px; margin-left: 6px; }
 
   .finding { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
   .finding:first-child { border-top: none; }
@@ -63,16 +74,49 @@
   {% if timeline %}
   <section class="block">
     <h3>Mileage timeline</h3>
-    <div class="timeline">
+
+    {% if chart %}
+    <div class="chart-wrap">
+      <svg viewBox="0 0 {{ chart.width }} {{ chart.height }}">
+        <defs>
+          <linearGradient id="chartFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="var(--accent)" stop-opacity="0.22" />
+            <stop offset="100%" stop-color="var(--accent)" stop-opacity="0" />
+          </linearGradient>
+        </defs>
+
+        <g class="chart-grid">
+          {% for tick in chart.y_ticks %}
+          <line x1="{{ chart.plot_left }}" y1="{{ tick.y }}" x2="{{ chart.width }}" y2="{{ tick.y }}" />
+          <text class="chart-ytick" x="0" y="{{ tick.y }}" dy="3">{{ tick.label }}</text>
+          {% endfor %}
+        </g>
+
+        <path class="chart-area" d="{{ chart.area }}"></path>
+        <path class="chart-line" d="{{ chart.path }}"></path>
+
+        {% for point in chart.points %}
+        <circle class="chart-point {% if point.flag %}flag-{{ point.flag }}{% endif %}"
+                cx="{{ point.cx }}" cy="{{ point.cy }}" r="4">
+          <title>{{ point.tooltip }}</title>
+        </circle>
+        {% if forloop.counter0|divisibleby:chart.label_stride %}
+        <text class="chart-xtick" x="{{ point.cx }}" y="{{ chart.plot_bottom }}" dy="16" text-anchor="middle">{{ point.date_label }}</text>
+        {% endif %}
+        {% endfor %}
+      </svg>
+    </div>
+    {% endif %}
+
+    <div class="reading-list">
       {% for item in timeline %}
-      <div class="timeline-item {% if item.flag %}flag-{{ item.flag }}{% endif %}">
-        <span class="timeline-dot"></span>
-        <div class="timeline-date">{{ item.reading.test_date|date:"d M Y" }}</div>
-        <div class="timeline-miles">{{ item.reading.miles|intcomma }} mi
+      <div class="reading-row {% if item.flag %}flag-{{ item.flag }}{% endif %}">
+        <span class="date"><span class="flag-dot"></span>{{ item.reading.test_date|date:"d M Y" }}</span>
+        <span class="miles">{{ item.reading.miles|intcomma }} mi
           {% if item.reading.was_converted %}
-            <span class="timeline-note">(converted from {{ item.reading.original_value|intcomma }} km)</span>
+            <span class="note">(converted from {{ item.reading.original_value|intcomma }} km)</span>
           {% endif %}
-        </div>
+        </span>
       </div>
       {% endfor %}
     </div>

@@ -1,0 +1,13 @@
+{% extends "checker/base.html" %}
+{% block content %}
+<div class="panel">
+  {% if error %}
+    <div class="error">{{ error }}</div>
+  {% endif %}
+  <form class="lookup" method="get" action="{% url 'results' %}">
+    <input type="text" name="reg" placeholder="e.g. AB12CDE" value="{{ reg|default:'' }}" autofocus required>
+    <button type="submit">Check</button>
+  </form>
+  <p class="hint">Pulls the vehicle's full MOT history from DVSA and checks it for signs of odometer tampering.</p>
+</div>
+{% endblock %}

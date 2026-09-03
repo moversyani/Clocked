@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Clocked{% endblock %}</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --border: #2a2e38;
+    --text: #e6e8ec;
+    --muted: #8a8f9c;
+    --accent: #4f8cff;
+    --info: #6b7280;
+    --warning: #d9a441;
+    --critical: #e0554f;
+    --clear: #3fb984;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 96px; }
+  header.site { display: flex; align-items: baseline; gap: 10px; margin-bottom: 40px; }
+  header.site h1 { font-size: 22px; margin: 0; letter-spacing: -0.02em; }
+  header.site span { color: var(--muted); font-size: 14px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .panel {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 28px;
+  }
+  .error {
+    background: rgba(224, 85, 79, 0.12);
+    border: 1px solid rgba(224, 85, 79, 0.4);
+    color: #ffb4b0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+  form.lookup { display: flex; gap: 10px; }
+  form.lookup input[type=text] {
+    flex: 1;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  form.lookup input[type=text]::placeholder { color: var(--muted); text-transform: none; letter-spacing: normal; }
+  form.lookup button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0 22px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  form.lookup button:hover { filter: brightness(1.08); }
+  .hint { color: var(--muted); font-size: 13px; margin-top: 12px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <h1><a href="{% url 'index' %}">Clocked</a></h1>
+    <span>UK vehicle mileage integrity checker</span>
+  </header>
+  {% block content %}{% endblock %}
+</div>
+</body>
+</html>

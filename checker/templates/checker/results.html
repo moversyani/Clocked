@@ -1,0 +1,111 @@
+{% extends "checker/base.html" %}
+{% load humanize %}
+{% block title %}{{ registration }} — Clocked{% endblock %}
+{% block content %}
+<style>
+  .verdict {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .verdict-clear { background: rgba(63,185,132,0.15); color: var(--clear); }
+  .verdict-review { background: rgba(217,164,65,0.15); color: var(--warning); }
+  .verdict-evidence_of_tampering { background: rgba(224,85,79,0.15); color: var(--critical); }
+  .verdict-insufficient_data { background: rgba(138,143,156,0.15); color: var(--muted); }
+
+  .vehicle-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+  .vehicle-head h2 { margin: 0 0 6px; font-size: 20px; }
+  .vehicle-head .sub { color: var(--muted); font-size: 14px; }
+  .back { font-size: 13px; }
+
+  section.block { margin-top: 34px; }
+  section.block h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 16px; }
+
+  .timeline { position: relative; padding-left: 26px; }
+  .timeline::before { content: ''; position: absolute; left: 6px; top: 4px; bottom: 4px; width: 2px; background: var(--border); }
+  .timeline-item { position: relative; padding-bottom: 20px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot { position: absolute; left: -26px; top: 3px; width: 12px; height: 12px; border-radius: 50%; background: var(--muted); border: 2px solid var(--panel); }
+  .timeline-item.flag-critical .timeline-dot { background: var(--critical); }
+  .timeline-item.flag-warning .timeline-dot { background: var(--warning); }
+  .timeline-date { font-size: 12px; color: var(--muted); }
+  .timeline-miles { font-size: 16px; font-weight: 600; }
+  .timeline-note { font-size: 12px; color: var(--muted); margin-left: 6px; }
+
+  .finding { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--border); }
+  .finding:first-child { border-top: none; }
+  .finding-icon { width: 18px; text-align: center; font-weight: 700; flex-shrink: 0; }
+  .finding.severity-critical .finding-icon { color: var(--critical); }
+  .finding.severity-warning .finding-icon { color: var(--warning); }
+  .finding.severity-info .finding-icon { color: var(--info); }
+  .finding-code { font-size: 11px; letter-spacing: 0.06em; color: var(--muted); text-transform: uppercase; margin-bottom: 2px; }
+  .finding-summary { font-size: 14px; }
+
+  .skipped-row { font-size: 13px; color: var(--muted); padding: 6px 0; border-top: 1px solid var(--border); }
+  .skipped-row:first-child { border-top: none; }
+</style>
+
+<div class="panel">
+  <div class="vehicle-head">
+    <div>
+      <h2>{{ registration }}</h2>
+      <div class="sub">{{ make }} {{ model }}</div>
+    </div>
+    <a class="back" href="{% url 'index' %}">&larr; Check another vehicle</a>
+  </div>
+
+  <span class="verdict verdict-{{ report.verdict.value }}">{{ verdict_label }}</span>
+
+  {% if timeline %}
+  <section class="block">
+    <h3>Mileage timeline</h3>
+    <div class="timeline">
+      {% for item in timeline %}
+      <div class="timeline-item {% if item.flag %}flag-{{ item.flag }}{% endif %}">
+        <span class="timeline-dot"></span>
+        <div class="timeline-date">{{ item.reading.test_date|date:"d M Y" }}</div>
+        <div class="timeline-miles">{{ item.reading.miles|intcomma }} mi
+          {% if item.reading.was_converted %}
+            <span class="timeline-note">(converted from {{ item.reading.original_value|intcomma }} km)</span>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endif %}
+
+  {% if report.findings %}
+  <section class="block">
+    <h3>Findings</h3>
+    {% for finding in report.findings %}
+    <div class="finding severity-{{ finding.severity.value }}">
+      <div class="finding-icon">
+        {% if finding.severity.value == "critical" %}&#10005;{% elif finding.severity.value == "warning" %}!{% else %}&middot;{% endif %}
+      </div>
+      <div>
+        <div class="finding-code">{{ finding.code }}</div>
+        <div class="finding-summary">{{ finding.summary }}</div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% if report.skipped %}
+  <section class="block">
+    <h3>Skipped tests</h3>
+    {% for skipped in report.skipped %}
+    <div class="skipped-row">
+      {% if skipped.test_date %}{{ skipped.test_date|date:"d M Y" }}{% else %}unknown date{% endif %}
+      &mdash; {{ skipped.reason }}
+    </div>
+    {% endfor %}
+  </section>
+  {% endif %}
+</div>
+{% endblock %}

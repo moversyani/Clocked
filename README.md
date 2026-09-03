@@ -2,7 +2,7 @@
 
 A UK vehicle mileage integrity checker. Enter a registration number, and Clocked pulls the vehicle's full MOT history from the DVSA government API and flags evidence of odometer tampering.
 
-Mileage clocking — winding an odometer back to make a car look less used than it is — is a live fraud in the UK second-hand market. Every MOT test records a mileage reading, and those readings are public. A car that has been clocked leaves the evidence in its own government record. Clocked reads it.
+Mileage clocking, winding an odometer back to make a car look less used than it is, is a live fraud in the UK second-hand market. Every MOT test records a mileage reading, and those readings are public. A car that has been clocked leaves the evidence in its own government record. Clocked reads it.
 
 **Status:** in development. Detection engine and API client complete and tested. Web interface and live API integration in progress.
 
@@ -13,10 +13,10 @@ Mileage clocking — winding an odometer back to make a car look less used than 
 | Check | What it means |
 | --- | --- |
 | `ODOMETER_ROLLBACK` | A reading lower than an earlier peak. An odometer cannot go backwards. |
-| `IMPLAUSIBLE_JUMP` | Mileage added at a rate above 60,000 miles a year — possible, but often means an earlier reading was understated. |
+| `IMPLAUSIBLE_JUMP` | Mileage added at a rate above 60,000 miles a year. Possible, but often means an earlier reading was understated. |
 | `STATIC_MILEAGE` | A year or more on the record with almost no mileage added. Could be genuine storage, could be a disconnected odometer. |
 | `MIXED_UNITS` | The history mixes miles and kilometres. Flagged so the user knows a conversion was applied. |
-| `MINOR_DISCREPANCY` | A drop under 100 miles. Reported, but not treated as fraud — it is almost always a typing error at the test station. |
+| `MINOR_DISCREPANCY` | A drop under 100 miles. Reported, but not treated as fraud, because it is almost always a typing error at the test station. |
 | `INCOMPLETE_HISTORY` | Tests that could not be used. Gaps reduce how much the verdict can be relied on. |
 
 Findings roll up into one of four verdicts: `CLEAR`, `REVIEW`, `EVIDENCE_OF_TAMPERING`, or `INSUFFICIENT_DATA`.
@@ -68,7 +68,7 @@ Verdict: EVIDENCE OF TAMPERING
   08 Apr 2022      71,950 mi
   15 Apr 2023      84,600 mi
 
-  [X] ODOMETER_ROLLBACK: Mileage fell by 46,210 miles — from 104,510 on
+  [X] ODOMETER_ROLLBACK: Mileage fell by 46,210 miles, from 104,510 on
       14 Mar 2020 to 58,300 on 02 Apr 2021. An odometer cannot decrease.
 ```
 
@@ -101,6 +101,6 @@ Clocked is released under the MIT Licence. See `LICENSE`.
 
 ## Disclaimer
 
-Clocked reports what the public MOT record shows. A finding is evidence worth investigating further, not proof of fraud, and a clear result does not mean a vehicle is untampered — only that the recorded history is internally consistent.
+Clocked reports what the public MOT record shows. A finding is evidence worth investigating further, not proof of fraud, and a clear result does not mean a vehicle is untampered, only that the recorded history is internally consistent.
 
 Mileage altered between MOT tests, on vehicles under three years old, or before import will not appear in this data at all. Treat the output as one input to a decision, not the decision itself.

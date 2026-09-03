@@ -76,7 +76,7 @@ def normalise(payload: dict) -> tuple[list[Reading], list[SkippedTest]]:
     Extract usable readings from a DVSA vehicle payload.
 
     Returns the readings sorted oldest first, plus everything that had to be
-    skipped. The skipped list is not thrown away — sparse or unreadable
+    skipped. The skipped list is not thrown away, because sparse or unreadable
     histories change how much confidence the final verdict deserves.
     """
     readings: list[Reading] = []

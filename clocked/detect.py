@@ -3,7 +3,7 @@ The detection engine.
 
 Given a vehicle's normalised odometer readings, decide whether the mileage
 history is internally consistent. Everything here is a claim about the
-vehicle's own history — no external averages, no assumptions about what a
+vehicle's own history. No external averages, no assumptions about what a
 "normal" car does. That matters, because a van doing 40,000 miles a year is
 not suspicious and a model that treats it as suspicious is useless.
 """
@@ -107,7 +107,7 @@ def _find_rollbacks(readings: list[Reading]) -> list[Finding]:
                 code="ODOMETER_ROLLBACK",
                 severity=Severity.CRITICAL,
                 summary=(
-                    f"Mileage fell by {drop:,} miles — from {high_water.miles:,} on "
+                    f"Mileage fell by {drop:,} miles, from {high_water.miles:,} on "
                     f"{high_water.test_date:%d %b %Y} to {reading.miles:,} on "
                     f"{reading.test_date:%d %b %Y}. An odometer cannot decrease."
                 ),
@@ -139,7 +139,7 @@ def _find_implausible_jumps(readings: list[Reading]) -> list[Finding]:
                 code="IMPLAUSIBLE_JUMP",
                 severity=Severity.WARNING,
                 summary=(
-                    f"{gained:,} miles added in {days} days — a rate of "
+                    f"{gained:,} miles added in {days} days, a rate of "
                     f"{annualised:,.0f} miles a year. Possible, but worth "
                     f"questioning, or a sign an earlier reading was understated."
                 ),

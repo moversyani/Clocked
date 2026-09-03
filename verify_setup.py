@@ -47,7 +47,7 @@ def stage_one_presence() -> bool:
 
     for name in config.REQUIRED:
         value = config.get(name)
-        # URLs are not secrets, and showing them in full is the whole point —
+        # URLs are not secrets, and showing them in full is the whole point.
         # a swapped token and scope URL is only visible if you can read them.
         shown = config.mask(value) if name in secrets else value
         line(PASS, f"{name} = {shown}")
@@ -73,7 +73,7 @@ def stage_two_urls() -> bool:
     token_url = config.get("DVSA_TOKEN_URL")
 
     if "token" not in token_url.lower():
-        line(FAIL, "DVSA_TOKEN_URL does not contain 'token' — check you have not swapped it with the scope URL")
+        line(FAIL, "DVSA_TOKEN_URL does not contain 'token'. Check you have not swapped it with the scope URL")
         ok = False
     else:
         line(PASS, "DVSA_TOKEN_URL looks like a token endpoint")
@@ -105,7 +105,7 @@ def stage_three_token() -> str | None:
 
 
 def stage_four_lookup(registration: str) -> bool:
-    """Proves the API key is correct — the token alone is not enough."""
+    """Proves the API key is correct. The token alone is not enough."""
     print(f"\n4. Live vehicle lookup ({registration.upper()})")
 
     try:
@@ -117,7 +117,7 @@ def stage_four_lookup(registration: str) -> bool:
     except MotApiError as error:
         line(FAIL, str(error))
         print("\n  If the token stage passed but this failed, the API key is the")
-        print("  likely problem — it is sent separately from the token.")
+        print("  likely problem, because it is sent separately from the token.")
         return False
 
     tests = payload.get("motTests") or []
@@ -137,7 +137,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--reg", help="A real registration to test the full pipeline against")
     args = parser.parse_args(argv)
 
-    print("Clocked — setup check")
+    print("Clocked: setup check")
 
     if not stage_one_presence():
         return 1

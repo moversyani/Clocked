@@ -3,7 +3,7 @@ Command line entry point.
 
 Runs against a local fixture file or, once credentials exist, a live
 registration. The fixture path exists so the project is demonstrable without
-network access — useful when the API is rate limiting, and useful in an
+network access, which helps when the API is rate limiting, and useful in an
 interview on someone else's wifi.
 
     python -m clocked.cli --fixture fixtures/rollback_history.json
@@ -48,7 +48,7 @@ def render(report, label: str) -> None:
         print("Skipped tests")
         for skipped in report.skipped:
             when = f"{skipped.test_date:%d %b %Y}" if skipped.test_date else "unknown date"
-            print(f"  {when} — {skipped.reason}")
+            print(f"  {when}: {skipped.reason}")
         print()
 
 
@@ -63,7 +63,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.fixture:
         with open(args.fixture) as handle:
             payload = json.load(handle)
-        label = f"{payload.get('registration', 'Unknown')} — {args.fixture}"
+        label = f"{payload.get('registration', 'Unknown')} ({args.fixture})"
     else:
         from .config import MissingCredentials
         from .mot_client import MotApiError, MotClient
@@ -74,7 +74,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"Error: {error}", file=sys.stderr)
             return 1
 
-        label = f"{args.reg.upper()} — live DVSA lookup"
+        label = f"{args.reg.upper()} (live DVSA lookup)"
 
     readings, skipped = normalise(payload)
     render(analyse(readings, skipped), label)

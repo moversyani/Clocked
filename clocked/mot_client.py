@@ -10,7 +10,7 @@ Two separate things have to be true before DVSA will answer a request:
      the key identifies which registered application is asking.
 
 Written against the documented flow. Untested against the live service until
-the DVSA credentials arrive — see README for what to verify first.
+the DVSA credentials arrive. See README for what to verify first.
 """
 
 from __future__ import annotations

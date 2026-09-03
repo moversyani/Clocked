@@ -1,6 +1,6 @@
 """
 Tests for the detection engine. These run against local fixtures and need no
-API key, no network and no credentials — the whole engine is testable offline.
+API key, no network and no credentials. The whole engine is testable offline.
 """
 
 import json

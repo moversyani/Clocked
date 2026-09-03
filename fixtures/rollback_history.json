@@ -1,0 +1,13 @@
+{
+  "registration": "XY68ZZT",
+  "make": "BMW",
+  "model": "320D",
+  "motTests": [
+    { "completedDate": "2018-03-11", "testResult": "PASSED", "odometerValue": "41200", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2019-03-09", "testResult": "PASSED", "odometerValue": "72840", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2020-03-14", "testResult": "PASSED", "odometerValue": "104510", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-04-02", "testResult": "PASSED", "odometerValue": "58300", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-04-08", "testResult": "PASSED", "odometerValue": "71950", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2023-04-15", "testResult": "PASSED", "odometerValue": "84600", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

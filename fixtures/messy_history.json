@@ -1,0 +1,12 @@
+{
+  "registration": "LM15PQR",
+  "make": "VAUXHALL",
+  "model": "ASTRA",
+  "motTests": [
+    { "completedDate": "2019-09-05", "testResult": "PASSED", "odometerValue": "18400", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2020-09-11", "testResult": "PASSED", "odometerValue": "46200", "odometerUnit": "km", "odometerResultType": "READ" },
+    { "completedDate": "2021-09-19", "testResult": "FAILED", "odometerValue": null, "odometerUnit": null, "odometerResultType": "NO_ODOMETER_READING" },
+    { "completedDate": "2022-09-23", "testResult": "PASSED", "odometerValue": "39,880", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2023-10-01", "testResult": "PASSED", "odometerValue": "39910", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

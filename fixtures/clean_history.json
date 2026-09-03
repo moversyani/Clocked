@@ -1,0 +1,12 @@
+{
+  "registration": "AB12CDE",
+  "make": "FORD",
+  "model": "FOCUS",
+  "motTests": [
+    { "completedDate": "2019-06-14", "testResult": "PASSED", "odometerValue": "24150", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2020-06-20", "testResult": "PASSED", "odometerValue": "35980", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-06-18", "testResult": "FAILED", "odometerValue": "47210", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-06-25", "testResult": "PASSED", "odometerValue": "58640", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2023-07-02", "testResult": "PASSED", "odometerValue": "69105", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

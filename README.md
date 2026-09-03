@@ -88,7 +88,7 @@ python -m clocked.cli --reg AB12CDE
 - [x] Detection engine with four verdict states
 - [x] Test suite running offline against fixtures
 - [x] DVSA client with token caching and backoff
-- [ ] Verify the client against live credentials
+- [x] Verify the client against live credentials
 - [ ] Django web interface
 - [ ] Mileage timeline chart with anomalies highlighted
 - [ ] Local response cache to stay inside rate limits
@@ -97,7 +97,6 @@ python -m clocked.cli --reg AB12CDE
 
 MOT history data is provided by the Driver and Vehicle Standards Agency under the Open Government Licence v3.0.
 
-Clocked is released under the MIT Licence. See `LICENSE`.
 
 ## Disclaimer
 

@@ -65,8 +65,8 @@
     margin-bottom: 20px;
     font-size: 14px;
   }
-  form.lookup { display: flex; gap: 10px; }
-  form.lookup input[type=text] {
+  .lookup { display: flex; gap: 10px; }
+  .lookup input[type=text] {
     flex: 1;
     background: var(--bg);
     border: 1px solid var(--border);
@@ -78,9 +78,9 @@
     text-transform: uppercase;
     transition: border-color .15s ease;
   }
-  form.lookup input[type=text]::placeholder { color: var(--muted); text-transform: none; letter-spacing: normal; }
-  form.lookup input[type=text]:focus { outline: none; border-color: var(--accent); }
-  form.lookup button {
+  .lookup input[type=text]::placeholder { color: var(--muted); text-transform: none; letter-spacing: normal; }
+  .lookup input[type=text]:focus { outline: none; border-color: var(--accent); }
+  .lookup button {
     background: var(--accent);
     color: #fff;
     border: none;
@@ -91,8 +91,8 @@
     cursor: pointer;
     transition: filter .15s ease, transform .1s ease;
   }
-  form.lookup button:hover { filter: brightness(1.08); }
-  form.lookup button:active { transform: translateY(1px); }
+  .lookup button:hover { filter: brightness(1.08); }
+  .lookup button:active { transform: translateY(1px); }
   .hint { color: var(--muted); font-size: 13px; margin-top: 12px; }
 </style>
 </head>

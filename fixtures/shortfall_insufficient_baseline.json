@@ -1,0 +1,10 @@
+{
+  "registration": "IB21DEF",
+  "make": "NISSAN",
+  "model": "QASHQAI",
+  "motTests": [
+    { "completedDate": "2020-01-01", "testResult": "PASSED", "odometerValue": "50000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-01-01", "testResult": "PASSED", "odometerValue": "30000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-01-01", "testResult": "PASSED", "odometerValue": "35000", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

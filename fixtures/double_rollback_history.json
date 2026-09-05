@@ -1,0 +1,12 @@
+{
+  "registration": "DR20WXY",
+  "make": "AUDI",
+  "model": "A4",
+  "motTests": [
+    { "completedDate": "2018-01-01", "testResult": "PASSED", "odometerValue": "50000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2019-01-01", "testResult": "PASSED", "odometerValue": "60000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2020-01-01", "testResult": "PASSED", "odometerValue": "40000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-01-01", "testResult": "PASSED", "odometerValue": "65000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-01-01", "testResult": "PASSED", "odometerValue": "45000", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

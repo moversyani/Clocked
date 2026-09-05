@@ -1,13 +1,46 @@
 {% extends "checker/base.html" %}
 {% block content %}
+<style>
+  .current-reading { display: flex; gap: 10px; margin-top: 14px; }
+  .current-reading input {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 14px;
+    transition: border-color .15s ease;
+  }
+  .current-reading input:focus { outline: none; border-color: var(--accent); }
+  .current-reading input[name=current_mileage] { flex: 1; }
+  .current-reading input[name=current_date] { flex: 1; color-scheme: dark; }
+  .current-reading-label {
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 20px;
+    margin-bottom: 6px;
+  }
+</style>
 <div class="panel">
   {% if error %}
     <div class="error">{{ error }}</div>
   {% endif %}
-  <form class="lookup" method="get" action="{% url 'results' %}">
-    <input type="text" name="reg" placeholder="e.g. AB12CDE" value="{{ reg|default:'' }}" autofocus required>
-    <button type="submit">Check</button>
+  <form method="get" action="{% url 'results' %}">
+    <div class="lookup">
+      <input type="text" name="reg" placeholder="e.g. AB12CDE" value="{{ reg|default:'' }}" autofocus required>
+      <button type="submit">Check</button>
+    </div>
+
+    <span class="current-reading-label">Optional: today's dashboard reading</span>
+    <div class="current-reading">
+      <input type="number" name="current_mileage" min="0" placeholder="Current mileage" value="{{ current_mileage|default:'' }}">
+      <input type="date" name="current_date" value="{{ current_date|default:'' }}">
+    </div>
   </form>
-  <p class="hint">Pulls the vehicle's full MOT history from DVSA and checks it for signs of odometer tampering.</p>
+
+  <p class="hint">Pulls the vehicle's full MOT history from DVSA and checks it for signs of odometer tampering. Add today's dashboard reading to cover the gap since the last MOT too, it will be clearly marked as unverified rather than treated as an official reading.</p>
 </div>
 {% endblock %}

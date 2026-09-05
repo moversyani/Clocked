@@ -1,0 +1,10 @@
+{
+  "registration": "CV19GAP",
+  "make": "HONDA",
+  "model": "CIVIC",
+  "motTests": [
+    { "completedDate": "2019-05-01", "testResult": "PASSED", "odometerValue": "30000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-01-10", "testResult": "PASSED", "odometerValue": "34000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-01-09", "testResult": "PASSED", "odometerValue": "38500", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

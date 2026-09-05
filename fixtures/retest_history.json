@@ -1,0 +1,12 @@
+{
+  "registration": "RT19XYZ",
+  "make": "TOYOTA",
+  "model": "COROLLA",
+  "motTests": [
+    { "completedDate": "2020-01-10", "testResult": "PASSED", "odometerValue": "20000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2021-01-08", "testResult": "PASSED", "odometerValue": "30500", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-01-10", "testResult": "FAILED", "odometerValue": "40000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2022-01-17", "testResult": "PASSED", "odometerValue": "40015", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2023-01-12", "testResult": "PASSED", "odometerValue": "51200", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

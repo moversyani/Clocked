@@ -1,0 +1,38 @@
+{
+  "registration": "HM09WER",
+  "make": "FORD",
+  "model": "MONDEO",
+  "motTests": [
+    {
+      "completedDate": "2021-01-10",
+      "testResult": "PASSED",
+      "odometerValue": "60000",
+      "odometerUnit": "mi",
+      "odometerResultType": "READ",
+      "rfrAndComments": [
+        { "type": "ADVISORY", "text": "Nearside rear brake disc worn" }
+      ]
+    },
+    {
+      "completedDate": "2022-01-09",
+      "testResult": "PASSED",
+      "odometerValue": "75000",
+      "odometerUnit": "mi",
+      "odometerResultType": "READ",
+      "rfrAndComments": [
+        { "type": "ADVISORY", "text": "Structural corrosion nearside sill" },
+        { "type": "ADVISORY", "text": "Front tyre tread depth close to legal limit" }
+      ]
+    },
+    {
+      "completedDate": "2023-01-08",
+      "testResult": "PASSED",
+      "odometerValue": "90000",
+      "odometerUnit": "mi",
+      "odometerResultType": "READ",
+      "rfrAndComments": [
+        { "type": "ADVISORY", "text": "Suspension coil spring corroded" }
+      ]
+    }
+  ]
+}

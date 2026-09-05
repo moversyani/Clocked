@@ -9,12 +9,14 @@ hand the result to a template.
 
 from __future__ import annotations
 
+from datetime import date, datetime
+
 from django.shortcuts import render
 
 from clocked.config import MissingCredentials
 from clocked.detect import analyse
 from clocked.mot_client import MotApiError, MotClient, VehicleNotFound
-from clocked.normalise import normalise
+from clocked.normalise import InvalidCurrentReading, add_current_reading, normalise
 
 from .charting import build_timeline_chart
 
@@ -25,10 +27,18 @@ def index(request):
 
 def results(request):
     registration = (request.GET.get("reg") or "").strip().upper()
+    current_mileage_raw = (request.GET.get("current_mileage") or "").strip()
+    current_date_raw = (request.GET.get("current_date") or "").strip()
+
+    form_state = {
+        "reg": registration,
+        "current_mileage": current_mileage_raw,
+        "current_date": current_date_raw,
+    }
 
     if not registration:
         return render(
-            request, "checker/index.html", {"error": "Enter a registration number."}
+            request, "checker/index.html", {"error": "Enter a registration number.", **form_state}
         )
 
     try:
@@ -37,16 +47,48 @@ def results(request):
         return render(
             request,
             "checker/index.html",
-            {"error": f"No MOT history found for {registration}.", "reg": registration},
+            {"error": f"No MOT history found for {registration}.", **form_state},
         )
     except (MotApiError, MissingCredentials) as error:
         return render(
             request,
             "checker/index.html",
-            {"error": str(error), "reg": registration},
+            {"error": str(error), **form_state},
         )
 
     readings, skipped = normalise(payload)
+
+    if current_mileage_raw:
+        try:
+            current_mileage = int(current_mileage_raw)
+        except ValueError:
+            return render(
+                request,
+                "checker/index.html",
+                {"error": "Current mileage must be a whole number.", **form_state},
+            )
+
+        if current_date_raw:
+            try:
+                current_date = datetime.strptime(current_date_raw, "%Y-%m-%d").date()
+            except ValueError:
+                return render(
+                    request,
+                    "checker/index.html",
+                    {"error": "Current reading date must be in YYYY-MM-DD format.", **form_state},
+                )
+        else:
+            current_date = date.today()
+
+        try:
+            readings = add_current_reading(readings, current_mileage, current_date)
+        except InvalidCurrentReading as error:
+            return render(
+                request,
+                "checker/index.html",
+                {"error": str(error), **form_state},
+            )
+
     report = analyse(readings, skipped)
 
     # Flag the reading a CRITICAL or WARNING finding points to, so the

@@ -1,0 +1,10 @@
+{
+  "registration": "LG15GAP",
+  "make": "LAND ROVER",
+  "model": "DEFENDER",
+  "motTests": [
+    { "completedDate": "2015-01-10", "testResult": "PASSED", "odometerValue": "15000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2017-03-01", "testResult": "PASSED", "odometerValue": "22000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2018-03-01", "testResult": "PASSED", "odometerValue": "29000", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}

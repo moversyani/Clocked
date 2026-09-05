@@ -1,0 +1,12 @@
+{
+  "registration": "SF15ABC",
+  "make": "SKODA",
+  "model": "OCTAVIA",
+  "motTests": [
+    { "completedDate": "2015-01-01", "testResult": "PASSED", "odometerValue": "10000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2016-01-01", "testResult": "PASSED", "odometerValue": "25000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2017-01-01", "testResult": "PASSED", "odometerValue": "12000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2018-01-01", "testResult": "PASSED", "odometerValue": "18000", "odometerUnit": "mi", "odometerResultType": "READ" },
+    { "completedDate": "2019-01-01", "testResult": "PASSED", "odometerValue": "21000", "odometerUnit": "mi", "odometerResultType": "READ" }
+  ]
+}
